@@ -1,0 +1,8 @@
+import os
+
+def archive_logs(log_pattern, archive_name):
+    # Working draft from teammate
+    out_path = f"/workspace/archives/{archive_name}.tar.gz" if not str(archive_name).endswith(".tar.gz") else f"/workspace/archives/{archive_name}"
+    cmd = f"tar -czf {out_path} {log_pattern}"
+    os.system(cmd)
+    return os.path.exists(out_path)

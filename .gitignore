@@ -1,0 +1,22 @@
+# Environment and Secrets
+.env
+.env.*
+!.env.example
+
+# Trial outputs and Harbor jobs
+trials/
+jobs/
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating System & IDE artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

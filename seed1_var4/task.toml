@@ -1,0 +1,17 @@
+schema_version = "1.0"
+
+[task]
+name = "solumn/seed1_var4"
+description = "Implement video frame extraction using ffmpeg."
+category = "security"
+
+[metadata]
+author_name = "Candidate"
+difficulty = "medium"
+
+[environment]
+os = "linux"
+timeout_sec = 300
+
+[verifier]
+timeout_sec = 60
