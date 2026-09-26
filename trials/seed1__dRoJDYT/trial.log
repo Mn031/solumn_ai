@@ -1,0 +1,30 @@
+Trial seed1__dRoJDYT failed: Docker compose command failed for environment seed1. Command: docker compose --project-name seed1__drojdyt__env --project-directory D:\solumn_ai\seed1\environment -f C:\Users\HP\AppData\Local\Temp\tmpetn4xhue\seed1__dRoJDYT__env-docker-compose-resources.json -f C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\environments\docker\docker-compose-build.yaml -f C:\Users\HP\AppData\Local\Temp\tmplzxegbhh\docker-compose-environment.json -f C:\Users\HP\AppData\Local\Temp\tmpncl314sv\docker-compose-mounts.json build. Return code: 1. Stdout:  Image seed1__drojdyt__env-main Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 535B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 586B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 ERROR: failed to do request: Head "https://registry-1.docker.io/v2/library/python/manifests/3.11-slim": dialing registry-1.docker.io:443 container via direct connection because Docker Desktop has no HTTPS proxy: connecting to registry-1.docker.io:443: dial tcp: lookup registry-1.docker.io: no such host
+------
+ > [internal] load metadata for docker.io/library/python:3.11-slim:
+------
+Dockerfile:1
+
+--------------------
+
+   1 | >>> FROM python:3.11-slim
+
+   2 |     
+
+   3 |     RUN apt-get update && apt-get install -y imagemagick && rm -rf /var/lib/apt/lists/*
+
+--------------------
+
+failed to solve: python:3.11-slim: failed to resolve source metadata for docker.io/library/python:3.11-slim: failed to do request: Head "https://registry-1.docker.io/v2/library/python/manifests/3.11-slim": dialing registry-1.docker.io:443 container via direct connection because Docker Desktop has no HTTPS proxy: connecting to registry-1.docker.io:443: dial tcp: lookup registry-1.docker.io: no such host
+
+. Stderr: None. 
+Collecting main service artifacts

@@ -1,0 +1,49 @@
+Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\trial\trial.py", line 415, in run
+    await self._prepare()
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\trial\trial.py", line 453, in _prepare
+    await self._setup_agent_environment()
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\trial\trial.py", line 1542, in _setup_agent_environment
+    await self._start_agent_environment()
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\trial\trial.py", line 1548, in _start_agent_environment
+    await asyncio.wait_for(
+    ...<4 lines>...
+    )
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\environments\docker\docker.py", line 981, in start
+    await self._run_docker_compose_command(["build"])
+  File "C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\environments\docker\docker.py", line 704, in _run_docker_compose_command
+    raise RuntimeError(
+    ...<5 lines>...
+    )
+RuntimeError: Docker compose command failed for environment seed1. Command: docker compose --project-name seed1__ypnmhex__env --project-directory D:\solumn_ai\seed1\environment -f C:\Users\HP\AppData\Local\Temp\tmpnyl9ghyf\seed1__ypnMHeX__env-docker-compose-resources.json -f C:\Users\HP\anaconda3\envs\Solumn_ai\Lib\site-packages\harbor\environments\docker\docker-compose-build.yaml -f C:\Users\HP\AppData\Local\Temp\tmp_oow_acn\docker-compose-environment.json -f C:\Users\HP\AppData\Local\Temp\tmp7ero_09m\docker-compose-mounts.json build. Return code: 1. Stdout:  Image seed1__ypnmhex__env-main Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 535B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 586B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 ERROR: failed to do request: Head "https://registry-1.docker.io/v2/library/python/manifests/3.11-slim": dialing registry-1.docker.io:443 container via direct connection because Docker Desktop has no HTTPS proxy: connecting to registry-1.docker.io:443: dial tcp: lookup registry-1.docker.io: no such host
+------
+ > [internal] load metadata for docker.io/library/python:3.11-slim:
+------
+Dockerfile:1
+
+--------------------
+
+   1 | >>> FROM python:3.11-slim
+
+   2 |     
+
+   3 |     RUN apt-get update && apt-get install -y imagemagick && rm -rf /var/lib/apt/lists/*
+
+--------------------
+
+failed to solve: python:3.11-slim: failed to resolve source metadata for docker.io/library/python:3.11-slim: failed to do request: Head "https://registry-1.docker.io/v2/library/python/manifests/3.11-slim": dialing registry-1.docker.io:443 container via direct connection because Docker Desktop has no HTTPS proxy: connecting to registry-1.docker.io:443: dial tcp: lookup registry-1.docker.io: no such host
+
+. Stderr: None. 

@@ -1,0 +1,134 @@
+{
+    "id": "9b61cf11-1e38-4960-b4c1-e74a95a926f3",
+    "task_name": "solumn/seed1_var4",
+    "trial_name": "seed1_var4__XrWTKzT",
+    "trial_uri": "file:///D:/solumn_ai/trials/seed1_var4__XrWTKzT",
+    "task_id": {
+        "path": "seed1_var4"
+    },
+    "source": null,
+    "task_checksum": "10e3afc249da2d23adea006ed2b0911994a6c1791b4d015be29e2a73ea43b24a",
+    "config": {
+        "task": {
+            "path": "seed1_var4",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "seed1_var4__XrWTKzT",
+        "trials_dir": "trials",
+        "install_only": false,
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "openai/gpt-5.5",
+            "n_concurrent": null,
+            "concurrency_group": null,
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "resume_trajectory": false,
+            "load_trajectory": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {},
+            "mcp_servers": []
+        },
+        "user_agent": null,
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "extra_instructions": [],
+        "job_id": null,
+        "source_trial": null
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "gpt-5.5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 7556,
+        "n_cache_tokens": 1792,
+        "n_output_tokens": 2103,
+        "cost_usd": 0.092806,
+        "model_usage": {
+            "gpt-5.5": {
+                "n_input_tokens": 7556,
+                "n_cache_tokens": 1792,
+                "n_output_tokens": 2103,
+                "cost_usd": 0.092806
+            }
+        },
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 4,
+            "api_request_times_msec": [
+                5198.2972621917725,
+                6049.782991409302,
+                8982.737302780151,
+                8657.418489456177
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "verifier_environment_mode": "shared",
+    "exception_info": null,
+    "started_at": "2026-09-26T20:10:19.487956Z",
+    "finished_at": "2026-09-26T20:14:00.731094Z",
+    "environment_setup": {
+        "started_at": "2026-09-26T20:10:19.617792Z",
+        "finished_at": "2026-09-26T20:13:00.588739Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-09-26T20:13:00.588857Z",
+        "finished_at": "2026-09-26T20:13:18.421826Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-09-26T20:13:18.422042Z",
+        "finished_at": "2026-09-26T20:13:55.220170Z"
+    },
+    "verifier": {
+        "started_at": "2026-09-26T20:13:55.242370Z",
+        "finished_at": "2026-09-26T20:13:56.712671Z"
+    },
+    "step_results": null
+}

@@ -1,0 +1,10 @@
+{
+    "task": {
+        "path": "seed1"
+    },
+    "trial_name": "seed1__ypnMHeX",
+    "agent": {
+        "name": "terminus-2",
+        "model_name": "openai/gpt-5.5"
+    }
+}

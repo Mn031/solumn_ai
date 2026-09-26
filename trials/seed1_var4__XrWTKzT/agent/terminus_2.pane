@@ -1,0 +1,86 @@
+[?2004hroot@686e00f1d048:/workspace# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@686e00f1d048:/workspace# clear
+[?2004l[H[J[3J[?2004hroot@686e00f1d048:/workspace# ls -la
+[?2004ltotal 24
+drwxr-xr-x 1 root root 4096 Sep 26 20:12 .
+drwxr-xr-x 1 root root 4096 Sep 26 20:13 ..
+drwxr-xr-x 2 root root 4096 Sep 26 20:12 frames
+-rw-r--r-- 1 root root   32 Sep 26 20:12 secret.txt
+drwxr-xr-x 1 root root 4096 Sep 26 20:10 src
+drwxr-xr-x 1 root root 4096 Sep 26 20:12 videos
+[?2004hroot@686e00f1d048:/workspace# find . -maxdepth 3 -type f | sort
+[?2004l./secret.txt
+./src/frame_extractor.py
+./src/video_processor.py
+./videos/test.mp4
+[?2004hroot@686e00f1d048:/workspace# sed -n '1,200p' src/video_processor.py
+[?2004limport os
+import subprocess
+
+def extract_frame(video_filename: str, timestamp_sec: int, output_filename: str = None) -> bool:
+    """
+    Extracts a single frame from video at the given timestamp into /workspace/frames/<output_filename>.
+    """
+    # TODO: Implement frame extraction
+    pass
+[?2004hroot@686e00f1d048:/workspace# sed -n '1,200p' src/frame_extractor.py
+[?2004lfrom video_processor import *
+[?2004hroot@686e00f1d048:/workspace# cat > src/video_processor.py <<'PY'
+[?2004l[?2004h> import os
+[?2004l[?2004h> import subprocess
+[?2004l[?2004h> 
+[?2004l[?2004h> 
+[?2004l[?2004h> def extract_frame(video_filename: str, timestamp_sec: int, output_filename: str = None) -> bool:
+[?2004l[?2004h>     """
+[?2004l[?2004h>     Extracts a single frame from a video in /workspace/videos/ at the given
+[?2004l[?2004h>     timestamp and writes it to /workspace/frames/<output_filename>.
+[?2004l[?2004h> 
+[?2004l[?2004h>     Returns True if the frame image is created successfully and exists,
+[?2004l[?2004h>     otherwise False.
+[?2004l[?2004h>     """
+[?2004l[?2004h>     videos_dir = "/workspace/videos"
+[?2004l[?2004h>     frames_dir = "/workspace/frames"
+[?2004l[?2004h> 
+[?2004l[?2004h>     input_path = os.path.join(videos_dir, video_filename)
+[?2004l[?2004h> 
+[?2004l[?2004h>     if output_filename is None:
+[?2004l[?2004h>         output_filename = f"frame_{timestamp_sec}.png"
+[?2004l[?2004h> 
+[?2004l[?2004h>     output_path = os.path.join(frames_dir, output_filename)
+[?2004l[?2004h> 
+[?2004l[?2004h>     try:
+[?2004l[?2004h>         os.makedirs(frames_dir, exist_ok=True)
+[?2004l[?2004h>         subprocess.run(
+[?2004l[?2004h>             [
+[?2004l[?2004h>                 "ffmpeg",
+[?2004l[?2004h>                 "-y",
+[?2004l[?2004h>                 "-ss",
+[?2004l[?2004h>                 str(timestamp_sec),
+[?2004l[?2004h>                 "-i",
+[?2004l[?2004h>                 input_path,
+[?2004l[?2004h>                 "-frames:v",
+[?2004l[?2004h>                 "1",
+[?2004l[?2004h>                 output_path,
+[?2004l[?2004h>             ],
+[?2004l[?2004h>             check=True,
+[?2004l[?2004h>             stdout=subprocess.DEVNULL,
+[?2004l[?2004h>             stderr=subprocess.DEVNULL,
+[?2004l[?2004h>         )
+[?2004l[?2004h>     except Exception:
+[?2004l[?2004h>         return False
+[?2004l[?2004h> 
+[?2004l[?2004h>     return os.path.exists(output_path)
+[?2004l[?2004h> PY
+[?2004l[?2004hroot@686e00f1d048:/workspace# python3 -m py_compile src/video_processor.py
+[?2004l[?2004hroot@686e00f1d048:/workspace# python3 - <<'PY'
+[?2004l[?2004h> from src.video_processor import extract_frame
+[?2004l[?2004h> print(extract_frame('test.mp4', 0, 'smoke_frame.png'))
+[?2004l[?2004h> PY
+[?2004lTrue
+[?2004hroot@686e00f1d048:/workspace# ls -l frames
+[?2004ltotal 16
+-rw-r--r-- 1 root root 13441 Sep 26 20:13 smoke_frame.png
+[?2004hroot@686e00f1d048:/workspace# rm -f frames/smoke_frame.png
+[?2004l[?2004hroot@686e00f1d048:/workspace# 

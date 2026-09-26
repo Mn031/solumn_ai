@@ -1,0 +1,8 @@
+Skipping image OS validation for hb__e3f7166fa23ce8f9fae51afce0adb0a1: docker inspect returned 1
+Trajectory dumped to trials\seed1_var2__Bwnxwbd\agent\trajectory.json
+Unknown Error in LLM interaction: litellm.InternalServerError: InternalServerError: OpenAIException - Connection error.
+Unknown Error in LLM interaction: litellm.InternalServerError: InternalServerError: OpenAIException - Connection error.
+Unknown Error in LLM interaction: litellm.InternalServerError: InternalServerError: OpenAIException - Connection error.
+Trajectory dumped to trials\seed1_var2__Bwnxwbd\agent\trajectory.json
+Trial seed1_var2__Bwnxwbd failed: litellm.InternalServerError: InternalServerError: OpenAIException - Connection error.
+Collecting main service artifacts

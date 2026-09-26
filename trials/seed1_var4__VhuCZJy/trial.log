@@ -1,0 +1,7 @@
+Skipping image OS validation for hb__0ce3a30f0d626b7bb15f7c6d3775a5ce: docker inspect returned 1
+Trajectory dumped to trials\seed1_var4__VhuCZJy\agent\trajectory.json
+Trajectory dumped to trials\seed1_var4__VhuCZJy\agent\trajectory.json
+Trajectory dumped to trials\seed1_var4__VhuCZJy\agent\trajectory.json
+Trajectory dumped to trials\seed1_var4__VhuCZJy\agent\trajectory.json
+Collecting main service artifacts
+Trial seed1_var4__VhuCZJy failed: Verifier execution timed out after 60.0 seconds

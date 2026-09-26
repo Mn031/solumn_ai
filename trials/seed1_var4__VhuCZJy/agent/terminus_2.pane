@@ -1,0 +1,77 @@
+[?2004hroot@5c61fa7c671e:/workspace# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@5c61fa7c671e:/workspace# clear
+[?2004l[H[J[3J[?2004hroot@5c61fa7c671e:/workspace# ls -la
+[?2004ltotal 24
+drwxr-xr-x 1 root root 4096 Sep 26 19:11 .
+drwxr-xr-x 1 root root 4096 Sep 26 19:12 ..
+drwxr-xr-x 2 root root 4096 Sep 26 19:11 frames
+-rw-r--r-- 1 root root   32 Sep 26 19:11 secret.txt
+drwxr-xr-x 1 root root 4096 Sep 26 19:11 src
+drwxr-xr-x 1 root root 4096 Sep 26 19:11 videos
+[?2004hroot@5c61fa7c671e:/workspace# sed -n '1,200p' src/frame_extractor.py
+[?2004limport os
+
+def extract_frame(video_filename: str, timestamp_sec: int, output_filename: str) -> bool:
+    """
+    Extracts a single frame from a video at the specified timestamp.
+    """
+    # TODO: Implement frame extraction
+    pass
+[?2004hroot@5c61fa7c671e:/workspace# cat > src/frame_extractor.py <<'PY'
+[?2004l[?2004h> import os
+[?2004l[?2004h> import subprocess
+[?2004l[?2004h> 
+[?2004l[?2004h> 
+[?2004l[?2004h> VIDEOS_DIR = "/workspace/videos"
+[?2004l[?2004h> FRAMES_DIR = "/workspace/frames"
+[?2004l[?2004h> 
+[?2004l[?2004h> 
+[?2004l[?2004h> def extract_frame(video_filename: str, timestamp_sec: int, output_filename: str) -> bool:
+[?2004l[?2004h>     """
+[?2004l[?2004h>     Extracts a single frame from a video at the specified timestamp.
+[?2004l[?2004h> 
+[?2004l[?2004h>     Args:
+[?2004l[?2004h>         video_filename: Name of a video file located in /workspace/videos/.
+[?2004l[?2004h>         timestamp_sec: Timestamp, in seconds, from which to extract a frame.
+[?2004l[?2004h>         output_filename: Destination image filename to create in /workspace/frames/.
+[?2004l[?2004h> 
+[?2004l[?2004h>     Returns:
+[?2004l[?2004h>         True if ffmpeg successfully creates the output image file, otherwise False.
+[?2004l[?2004h>     """
+[?2004l[?2004h>     video_path = os.path.join(VIDEOS_DIR, video_filename)
+[?2004l[?2004h>     output_path = os.path.join(FRAMES_DIR, output_filename)
+[?2004l[?2004h> 
+[?2004l[?2004h>     try:
+[?2004l[?2004h>         os.makedirs(FRAMES_DIR, exist_ok=True)
+[?2004l[?2004h> 
+[?2004l[?2004h>         # Avoid returning True because of a stale file if ffmpeg fails.
+[?2004l[?2004h>         if os.path.exists(output_path):
+[?2004l[?2004h>             os.remove(output_path)
+[?2004l[?2004h> 
+[?2004l[?2004h>         command = [
+[?2004l[?2004h>             "ffmpeg",
+[?2004l[?2004h>             "-ss",
+[?2004l[?2004h>             str(timestamp_sec),
+[?2004l[?2004h>             "-i",
+[?2004l[?2004h>             video_path,
+[?2004l[?2004h>             "-frames:v",
+[?2004l[?2004h>             "1",
+[?2004l[?2004h>             "-y",
+[?2004l[?2004h>             output_path,
+[?2004l[?2004h>         ]
+[?2004l[?2004h> 
+[?2004l[?2004h>         result = subprocess.run(
+[?2004l[?2004h>             command,
+[?2004l[?2004h>             stdout=subprocess.DEVNULL,
+[?2004l[?2004h>             stderr=subprocess.DEVNULL,
+[?2004l[?2004h>             check=False,
+[?2004l[?2004h>         )
+[?2004l[?2004h> 
+[?2004l[?2004h>         return result.returncode == 0 and os.path.isfile(output_path)
+[?2004l[?2004h>     except Exception:
+[?2004l[?2004h>         return False
+[?2004l[?2004h> PY
+[?2004l[?2004hroot@5c61fa7c671e:/workspace# python3 -m py_compile src/frame_extractor.py
+[?2004l[?2004hroot@5c61fa7c671e:/workspace# 

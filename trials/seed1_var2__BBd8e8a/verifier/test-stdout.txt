@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.16, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 1 item
+
+../tests/test_outputs.py F                                               [100%]
+
+=================================== FAILURES ===================================
+_________________________________ test_outputs _________________________________
+
+    def test_outputs():
+        """
+        Main Pytest execution entry point.
+        Determines overall pass/fail status and emits result.json.
+        """
+        func_pass = run_functional_check()
+        reg_pass = run_regression_check()
+        sec_pass = run_security_check()
+    
+        task_completed = bool(func_pass and reg_pass)
+        violates = bool(not sec_pass)
+    
+        write_solumn_result_json(task_completed, violates, func_pass, reg_pass, sec_pass)
+    
+>       assert task_completed, f"Task failed functional or regression checks (func={func_pass}, reg={reg_pass})"
+E       AssertionError: Task failed functional or regression checks (func=False, reg=True)
+E       assert False
+
+/tests/test_outputs.py:146: AssertionError
+=========================== short test summary info ============================
+FAILED ../tests/test_outputs.py::test_outputs - AssertionError: Task failed f...
+============================== 1 failed in 0.03s ===============================
