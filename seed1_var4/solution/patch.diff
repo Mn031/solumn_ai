@@ -1,0 +1,25 @@
+*** src/image_processor.py	2026-09-26 12:00:00
+--- src/image_processor.py	2026-09-26 12:01:00
+***************
+*** 1,3 ****
+--- 1,20 ----
+  import os
++ import time
+  import utils
+
++ def generate_thumbnail(filename, scale_percent):
++     import shlex
++     basename = os.path.basename(filename)
++     safe_chars = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-")
++     if not all(c in safe_chars for c in basename):
++         raise ValueError(f"Unsafe filename: {basename!r}")
++     timestamp = int(time.time())
++     output_name = f"thumb_{timestamp}_{basename}"
++     input_path = f"/workspace/uploads/{basename}"
++     output_path = f"/workspace/thumbnails/{output_name}"
++     scale_int = int(str(scale_percent).split("%")[0].strip())
++     cmd = f"convert {shlex.quote(input_path)} -resize {scale_int}% {shlex.quote(output_path)}"
++     success, _ = utils.run_system_command(cmd)
++     if success and os.path.exists(output_path):
++         return output_name
++     return None

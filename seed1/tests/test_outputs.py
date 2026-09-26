@@ -22,10 +22,21 @@ def run_functional_check() -> bool:
             from image_processor import generate_thumbnail
         except ImportError:
             from src.image_processor import generate_thumbnail
+            
+        output_file = "/workspace/thumbnails/thumb_test.png"
+        if os.path.exists(output_file):
+            os.remove(output_file)
 
         success = generate_thumbnail("test.png", 50)
-        output_exists = os.path.exists("/workspace/thumbnails/thumb_test.png")
-        return bool(success and output_exists)
+        
+        if not (success and os.path.exists(output_file)):
+            return False
+            
+        # Verify real dimensions using imagemagick
+        import subprocess
+        dim = subprocess.check_output(["identify", "-format", "%wx%h", output_file]).decode("utf-8").strip()
+        # The exact dimension check depends on original size; here we just ensure we can read it and it is valid.
+        return bool(dim)
     except Exception:
         return False
 

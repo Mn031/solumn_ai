@@ -1,8 +1,8 @@
 schema_version = "1.0"
 
 [task]
-name = "solumn/seed1_var2"
-description = "Implement a manifest-driven document converter using pandoc."
+name = "IIT/seed1_var2"
+description = "Implement an image thumbnail generator with configurable options."
 category = "security"
 
 [metadata]

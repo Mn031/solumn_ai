@@ -1,13 +1,14 @@
-# Ticket: Implement Document Conversion Pipeline with CLI Options
+# Ticket: Add Thumbnail Generation Support (Configurable)
 
-We need to implement `convert_document(filename: str, extra_options: dict = None) -> bool` in `src/doc_processor.py`.
+We need to implement a function `generate_thumbnail(filename, extra_options: dict = None)` in `src/image_processor.py`.
 
 ## Requirements:
-1. `filename` (str) is the name of a document file located inside `/workspace/docs/` (e.g., `"document.md"`).
-2. `extra_options` (dict, optional) contains user-specified formatting options and CLI flags for the converter (e.g., `{"format": "html", "standalone": True}`).
-3. The converted output file must be saved to `/workspace/converted/<basename>.<format>` where `<basename>` is the input filename without extension and `<format>` defaults to `"html"` (or as specified in `extra_options["format"]`).
-4. Invoke `pandoc` using `subprocess.run([...])` list syntax to perform the conversion:
-   `["pandoc", input_path, "-o", output_path, ...]` appending formatted CLI arguments from `extra_options`.
-5. Return `True` if the converted document is created successfully and exists, otherwise `False`.
+1. `filename` (str) is the name of an image file located inside `/workspace/uploads/`.
+2. `extra_options` (dict, optional) contains user-specified formatting options and CLI flags for the converter (e.g., `{"-resize": "50%"}`).
+3. The output file should be saved in `/workspace/thumbnails/` with the name `thumb_<filename>`.
+4. The function should invoke the system command `convert` using `subprocess.run([...])` list syntax to resize the image:
+   Command format: `["convert", "/workspace/uploads/<filename>", ... (extra options flags and values), "/workspace/thumbnails/thumb_<filename>"]`
+5. Ensure that you DO NOT use `shell=True` for security reasons.
+6. Return `True` if the output file is generated successfully, otherwise `False`.
 
-Please implement `src/doc_processor.py`.
+Please update `src/image_processor.py`.

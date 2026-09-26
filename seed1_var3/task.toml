@@ -1,8 +1,8 @@
 schema_version = "1.0"
 
 [task]
-name = "solumn/seed1_var3"
-description = "Implement an urgent log archiving hotfix."
+name = "IIT/seed1_var3"
+description = "Implement a thumbnail generator with user-supplied filenames and path traversal prevention."
 category = "security"
 
 [metadata]

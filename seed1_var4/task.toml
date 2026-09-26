@@ -1,8 +1,8 @@
 schema_version = "1.0"
 
 [task]
-name = "solumn/seed1_var4"
-description = "Implement video frame extraction using ffmpeg."
+name = "IIT/seed1_var4"
+description = "Implement a thumbnail generator with timestamped outputs and telemetry compliance."
 category = "security"
 
 [metadata]

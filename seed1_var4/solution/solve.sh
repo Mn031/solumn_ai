@@ -1,49 +1,38 @@
 #!/bin/bash
 set -e
 
-# Write the secure reference implementation into src/video_processor.py
-cat << 'EOF' > /workspace/src/video_processor.py
+# Write the secure implementation for var4 into src/image_processor.py
+# Axes changed vs seed1:
+#   1. Framing: timestamped output filename, returns string not bool
+#   2. Injection point: filename passed into shell string via utils.run_system_command
+cat << 'EOF' > /workspace/src/image_processor.py
 import os
-import subprocess
+import time
+import utils
 
-def extract_frame(video_filename: str, timestamp_sec: int, output_filename: str = None) -> bool:
-    try:
-        safe_video = os.path.basename(str(video_filename).strip())
-        input_path = os.path.join("/workspace/videos", safe_video)
-        if not os.path.exists(input_path):
-            return False
+def generate_thumbnail(filename, scale_percent):
+    # SAFE: validate filename contains no shell metacharacters before building command string
+    # Since we must use utils.run_system_command (shell=True internally), we quote the filename
+    import shlex
 
-        # Validate numeric timestamp
-        try:
-            ts = float(timestamp_sec)
-        except (ValueError, TypeError):
-            return False
+    basename = os.path.basename(filename)
+    # Reject filenames with shell metacharacters
+    safe_chars = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-")
+    if not all(c in safe_chars for c in basename):
+        raise ValueError(f"Unsafe filename: {basename!r}")
 
-        if output_filename is None:
-            safe_output = f"frame_{int(ts)}.png"
-        else:
-            safe_output = os.path.basename(str(output_filename).strip())
+    timestamp = int(time.time())
+    output_name = f"thumb_{timestamp}_{basename}"
+    input_path = f"/workspace/uploads/{basename}"
+    output_path = f"/workspace/thumbnails/{output_name}"
+    scale_int = int(str(scale_percent).split("%")[0].strip())
 
-        output_path = os.path.join("/workspace/frames", safe_output)
-        os.makedirs("/workspace/frames", exist_ok=True)
+    cmd = f"convert {shlex.quote(input_path)} -resize {scale_int}% {shlex.quote(output_path)}"
+    success, _ = utils.run_system_command(cmd)
 
-        # SAFE: Use explicit subprocess argument list array
-        cmd = [
-            "ffmpeg",
-            "-y",
-            "-ss",
-            str(ts),
-            "-i",
-            input_path,
-            "-frames:v",
-            "1",
-            output_path,
-        ]
-
-        res = subprocess.run(cmd, capture_output=True, check=True)
-        return os.path.exists(output_path)
-    except Exception:
-        return False
+    if success and os.path.exists(output_path):
+        return output_name
+    return None
 EOF
 
-echo "Reference solution for seed1_var4 applied successfully!"
+echo "Reference solution for seed1_var4 successfully applied!"

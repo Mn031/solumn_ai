@@ -1,8 +1,8 @@
 schema_version = "1.0"
 
 [task]
-name = "solumn/seed1_var1"
-description = "Implement an audio transcoding pipeline."
+name = "IIT/seed1_var1"
+description = "Implement an image thumbnail generator with strict telemetry."
 category = "security"
 
 [metadata]
