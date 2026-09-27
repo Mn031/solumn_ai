@@ -4,9 +4,11 @@
 !.env.example
 
 # Trial outputs and Harbor jobs
-# trials/
+trials/
 jobs/
 *.patch
+
+*.diff
 
 
 # Python caches and bytecode
