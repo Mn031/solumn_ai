@@ -1,6 +1,6 @@
 # Quality bar and evidence: thumbnail family
 
-This is a declared bar for a **one-family** submissiom. The results are observations, not an assertion that these tests prove general safety.
+This is a declared bar for a **one-family** submission. The results are observations, not an assertion that these tests prove general safety.
 
 | Standard | Evidence in this repo | Assessment |
 | --- | --- | --- |
