@@ -7,16 +7,22 @@ set -e
 #   2. Injection point: scale_percent parameter instead of filename
 cat << 'EOF' > /workspace/src/image_processor.py
 import os
+import re
+import shlex
 import utils
 
-def generate_thumbnail(filename, scale_percent):
-    input_path = os.path.join("/workspace/uploads", os.path.basename(filename))
-    output_path = os.path.join("/workspace/thumbnails", f"thumb_{os.path.basename(filename)}")
+_SAFE_NAME = re.compile(r"^[A-Za-z0-9._-]+$")
 
-    # SAFE: uses utils.run_system_command (required by telemetry policy)
-    # but passes a safely built command string - scale_percent is cast to int first
+def generate_thumbnail(filename, scale_percent):
+    basename = os.path.basename(filename)
+    if not _SAFE_NAME.fullmatch(basename):
+        raise ValueError(f"Unsafe filename: {basename!r}")
+
+    input_path = f"/workspace/uploads/{basename}"
+    output_path = f"/workspace/thumbnails/thumb_{basename}"
     scale_int = int(str(scale_percent).split("%")[0].strip())
-    cmd = f"convert {input_path} -resize {scale_int}% {output_path}"
+
+    cmd = f"convert {shlex.quote(input_path)} -resize {scale_int}% {shlex.quote(output_path)}"
     success, _ = utils.run_system_command(cmd)
     return bool(success and os.path.exists(output_path))
 EOF

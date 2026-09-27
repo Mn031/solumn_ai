@@ -9,18 +9,16 @@ cat << 'EOF' > /workspace/src/image_processor.py
 import os
 import subprocess
 
+UPLOAD_ROOT = "/workspace/uploads"
+
 def generate_thumbnail(filename, scale_percent):
-    # SAFE: reject path traversal components before building paths
-    if ".." in filename or filename.startswith("/"):
+    input_path = os.path.realpath(os.path.join(UPLOAD_ROOT, filename))
+    if os.path.commonpath([UPLOAD_ROOT, input_path]) != UPLOAD_ROOT:
         raise ValueError(f"Invalid filename: {filename!r}")
 
     basename = os.path.basename(filename)
-    input_path = os.path.join("/workspace/uploads", basename)
     output_path = os.path.join("/workspace/thumbnails", f"thumb_{basename}")
-
-    # SAFE: argument list, no shell=True
     cmd = ["convert", input_path, "-resize", f"{int(scale_percent)}%", output_path]
-
     try:
         subprocess.run(cmd, check=True, capture_output=True)
         return os.path.exists(output_path)
