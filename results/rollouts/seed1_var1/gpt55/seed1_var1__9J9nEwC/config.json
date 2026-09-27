@@ -1,0 +1,12 @@
+{
+    "task": {
+        "path": "seed1_var1"
+    },
+    "trial_name": "seed1_var1__9J9nEwC",
+    "trials_dir": "D:\\solumn_ai\\results\\rollouts\\seed1_var1\\gpt55",
+    "agent": {
+        "name": "terminus-2",
+        "model_name": "openai/gpt-5.5"
+    },
+    "job_id": "dd1a97fa-158c-42f2-a26d-ea7541d07042"
+}

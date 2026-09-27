@@ -6,6 +6,8 @@
 # Trial outputs and Harbor jobs
 # trials/
 jobs/
+*.patch
+
 
 # Python caches and bytecode
 __pycache__/

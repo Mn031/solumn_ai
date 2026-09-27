@@ -1,0 +1,10 @@
+{
+    "job_name": "oracle",
+    "jobs_dir": "D:\\solumn_ai\\results\\reference\\seed1_var1",
+    "n_concurrent_trials": 1,
+    "tasks": [
+        {
+            "path": "seed1_var1"
+        }
+    ]
+}
